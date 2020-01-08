@@ -1,14 +1,3 @@
-# framework-js
-
-## Instalation
-
-`$ npm install | yarn install`
-
-### Example of using
-
-#### createElement with render
-
-```javascript
 import React from '../modules/mini-react/index.js';
 
 const div = React.createElement(
@@ -28,4 +17,3 @@ const test = React.createElement(
 );
 
 React.render(test, document.getElementById('root'));
-```
