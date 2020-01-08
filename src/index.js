@@ -8,7 +8,7 @@ const div = React.createElement(
     React.createElement('span', null, 'lol'),
 );
 
-const test = React.createElement(
+const App = React.createElement(
     'div',
     { id: 'foo' },
     React.createElement('h1', null, 'Test de create elemnt'),
@@ -16,4 +16,4 @@ const test = React.createElement(
     div,
 );
 
-React.render(test, document.getElementById('root'));
+React.render(App, document.getElementById('root'));

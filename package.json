@@ -1,24 +1,28 @@
 {
-  "name": "framework",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kdiogo/framework-js.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kdiogo/framework-js/issues"
-  },
-  "homepage": "https://github.com/kdiogo/framework-js#readme",
-  "dependencies": {
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.9.0",
-    "prettier": "^1.19.1"
-  }
+    "name": "framework",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "sass": "node-sass -w src/ -o  src/ ",
+        "sass-build": "node-sass -r --output-style compressed src/ -o -o src/",
+        "start": "npm run sass"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kdiogo/framework-js.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/kdiogo/framework-js/issues"
+    },
+    "homepage": "https://github.com/kdiogo/framework-js#readme",
+    "dependencies": {
+        "eslint-config-airbnb": "^18.0.1",
+        "eslint-config-prettier": "^6.9.0",
+        "node-sass": "^4.13.0",
+        "prettier": "^1.19.1"
+    }
 }
