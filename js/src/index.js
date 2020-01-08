@@ -7,4 +7,7 @@ const test = React.createElement(
     React.createElement('span', null, 'Test de span'),
 );
 
+const reneder = React.render(test, document.getElementById('root'));
+
 console.log('test ===> ', test);
+console.log('reneder ===> ', reneder);

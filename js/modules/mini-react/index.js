@@ -1,10 +1,9 @@
-import { createElement, createTextElement } from './core.js';
-
+import { createElement, createTextElement } from './Core.js';
+import { render } from './DOM.js';
 const React = {
     createElement,
     createTextElement,
+    render,
 };
-
-console.log('React => ', React);
 
 export default React;
