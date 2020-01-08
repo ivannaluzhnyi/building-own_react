@@ -1,12 +1,11 @@
 import React from '../modules/mini-react/index.js';
-import { createElement } from '../modules/mini-react/Core.js';
 
 const div = React.createElement(
     'div',
     { className: 'test-class' },
 
-    createElement('span', null, 'testing'),
-    createElement('span', null, 'lol'),
+    React.createElement('span', null, 'testing'),
+    React.createElement('span', null, 'lol'),
 );
 
 const test = React.createElement(
