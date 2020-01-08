@@ -1,8 +1,10 @@
 # framework-js
 
-## Instalation
+## Instalation & start
 
 `$ npm install | yarn install`
+
+`$ npm start | yarn start`
 
 ### Example of using
 

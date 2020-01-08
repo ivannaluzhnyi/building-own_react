@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "sass": "node-sass -w src/ -o  src/ ",
-        "sass-build": "node-sass -r --output-style compressed src/ -o -o src/"
+        "sass-build": "node-sass -r --output-style compressed src/ -o -o src/",
+        "start": "npm run sass"
     },
     "repository": {
         "type": "git",
