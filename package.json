@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/kdiogo/framework-js/issues"
   },
-  "homepage": "https://github.com/kdiogo/framework-js#readme"
+  "homepage": "https://github.com/kdiogo/framework-js#readme",
+  "dependencies": {
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "prettier": "^1.19.1"
+  }
 }
