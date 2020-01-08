@@ -1,11 +1,20 @@
 import React from '../modules/mini-react/index.js';
+import { createElement } from '../modules/mini-react/Core.js';
+
+const div = React.createElement(
+    'div',
+    { className: 'test-class' },
+
+    createElement('span', null, 'testing'),
+    createElement('span', null, 'lol'),
+);
 
 const test = React.createElement(
     'div',
     { id: 'foo' },
     React.createElement('h1', null, 'Test de create elemnt'),
-    React.createElement('span', null, 'Test de span'),
+    React.createElement('a', null, 'Test de span'),
+    div,
 );
-console.log('test ===> ', test);
 
 React.render(test, document.getElementById('root'));
