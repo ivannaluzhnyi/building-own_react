@@ -19,6 +19,8 @@ function createTextElement(text) {
  * @param  {...object|string} children
  */
 function createElement(type, props, ...children) {
+    console.log('CORE | type  => ', type);
+    console.log('CORE | typeof  => ', typeof type);
     return {
         type,
         props: {
