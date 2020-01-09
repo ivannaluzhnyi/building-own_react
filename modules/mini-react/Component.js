@@ -5,13 +5,21 @@ class Component {
 
         this._pendingState = null;
     }
+
     updateComponent() {
-        // Awesome things to come
+        // Awesome things to come;
+        // TODO
+
+        console.log(this);
     }
+
     setState(partialNewState) {
-        const newState = Object.assign({}, this.state, partialNewState);
+        const newState = { ...this.state, ...partialNewState };
         this.state = newState;
     }
-    //will be overridden
+
+    // will be overridden
     render() {}
 }
+
+export default Component;

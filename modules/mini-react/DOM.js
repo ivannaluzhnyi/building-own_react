@@ -1,26 +1,17 @@
-/**
- *
- * @param {object} fiber
- * @returns {Element}
- */
-function createDom(fiber) {
-    const dom =
-        fiber.type == 'TEXT_ELEMENT'
-            ? document.createTextNode('')
-            : document.createElement(fiber.type);
-
-    updateDom(dom, {}, fiber.props);
-
-    return dom;
-}
-
+/* eslint-disable no-undef */
 const isEvent = key => key.startsWith('on');
 const isProperty = key => key !== 'children' && !isEvent(key);
 const isNew = (prev, next) => key => prev[key] !== next[key];
 const isGone = (prev, next) => key => !(key in next);
 
+/**
+ *
+ * @param {object} dom
+ * @param {object} prevProps
+ * @param {object} nextProps
+ */
 function updateDom(dom, prevProps, nextProps) {
-    //Remove old or changed event listeners
+    // Remove old or changed event listeners
     Object.keys(prevProps)
         .filter(isEvent)
         .filter(key => !(key in nextProps) || isNew(prevProps, nextProps)(key))
@@ -53,6 +44,22 @@ function updateDom(dom, prevProps, nextProps) {
             const eventType = name.toLowerCase().substring(2);
             dom.addEventListener(eventType, nextProps[name]);
         });
+}
+
+/**
+ *
+ * @param {object} fiber
+ * @returns {Element}
+ */
+function createDom(fiber) {
+    const dom =
+        fiber.type === 'TEXT_ELEMENT'
+            ? document.createTextNode('')
+            : document.createElement(fiber.type);
+
+    updateDom(dom, {}, fiber.props);
+
+    return dom;
 }
 
 function commitRoot() {
@@ -157,9 +164,12 @@ function performUnitOfWork(fiber) {
         }
         nextFiber = nextFiber.parent;
     }
+
+    return null;
 }
 
 let wipFiber = null;
+// eslint-disable-next-line no-unused-vars
 let hookIndex = null;
 
 function updateFunctionComponent(fiber) {
@@ -208,6 +218,7 @@ function updateHostComponent(fiber) {
     reconcileChildren(fiber, fiber.props.children);
 }
 
+// eslint-disable-next-line no-shadow
 function reconcileChildren(wipFiber, elements) {
     let index = 0;
     let oldFiber = wipFiber.alternate && wipFiber.alternate.child;
@@ -217,7 +228,7 @@ function reconcileChildren(wipFiber, elements) {
         const element = elements[index];
         let newFiber = null;
 
-        const sameType = oldFiber && element && element.type == oldFiber.type;
+        const sameType = oldFiber && element && element.type === oldFiber.type;
 
         if (sameType) {
             newFiber = {
@@ -255,7 +266,7 @@ function reconcileChildren(wipFiber, elements) {
         }
 
         prevSibling = newFiber;
-        index++;
+        index += 1;
     }
 }
 export { render };
