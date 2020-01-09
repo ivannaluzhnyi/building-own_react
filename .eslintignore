@@ -1,4 +1,4 @@
 build/
 node_modules/
 registerServiceWorker.js
-
+modules/mini-react/Component.js

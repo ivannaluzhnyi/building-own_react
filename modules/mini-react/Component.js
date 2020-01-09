@@ -6,12 +6,14 @@ class Component {
         this._pendingState = null;
     }
 
-    updateComponent() {
-        // Awesome things to come;
-        // TODO
+    componentDidMount() {}
 
-        console.log(this);
-    }
+    // updateComponent() {
+    //     // Awesome things to come;
+    //     // TODO
+
+    //     console.log(this);
+    // }
 
     setState(partialNewState) {
         const newState = { ...this.state, ...partialNewState };
@@ -19,6 +21,7 @@ class Component {
     }
 
     // will be overridden
+
     render() {}
 }
 
