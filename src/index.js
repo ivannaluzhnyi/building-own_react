@@ -1,48 +1,97 @@
 import React from '../modules/mini-react/index.js';
 
-import Main from './Main.js';
+// eslint-disable-next-line react/prop-types
+const FunctionalTest = ({ counter }) => {
+    const [color, setColor] = React.useState('green');
+    const [object, setObject] = React.useState({});
 
-// const div = React.createElement(
-//     'div',
-//     { className: 'test-class' },
+    //   console.log("color render => ", color);
+    //   console.log("-----------------");
+    //   console.log("object render => ", object);
 
-//     React.createElement('span', null, 'testing'),
-//     React.createElement('span', null, 'lol'),
-// );
-
-// const App = React.createElement(
-//     'div',
-//     { id: 'foo' },
-//     React.createElement('h1', null, 'Test de create elemnt'),
-//     React.createElement('a', null, 'Test de span'),
-//     div,
-//     Main,
-// );
-
-const prepareProps = {
-    users: [
-        {
-            id: 1,
-            email: 'test@react.com',
-        },
-        {
-            id: 2,
-            email: 'help@react.com',
-        },
-    ],
-};
-
-const FunctionComponent = props => {
-    console.log('props ====> ', props); // find users in props :)
     return React.createElement(
         'div',
-        null,
-        React.createElement('h1', null, 'Test functional compoennt'),
+        { className: 'functional-component' },
+
+        React.createElement(
+            'button',
+
+            {
+                style: `background-color:${color};`,
+                type: 'button',
+                onClick: () => {
+                    setColor('red');
+                    setObject({ id: '23', name: 'test' });
+                },
+            },
+            'Update Color and test object',
+        ),
+
+        React.createElement('br', null, null),
+        React.createElement('span', null, `${JSON.stringify(object)}`),
+
+        React.createElement('br', null, null),
+
+        React.createElement('span', null, `counts + 1 = > ${counter}`),
+        React.createElement('br', null, null),
     );
 };
 
-console.log('index src  typeof=> ', Main);
+class Main extends React.Component {
+    constructor(props) {
+        super(props);
 
-const AppComponent = React.createElement(FunctionComponent, prepareProps, null);
+        this.state = {
+            text: 'default',
+            counter: 0,
+        };
+    }
 
-React.render(AppComponent, document.getElementById('root'));
+    componentDidMount() {
+        console.log('componentDidMount');
+    }
+
+    componentDidUpdate() {
+        console.log('componentDidUpdate');
+    }
+
+    handleCount = () => {
+        const { counter } = this.state;
+
+        this.setState({ counter: counter + 1, text: 'update tetx' });
+
+        console.log('state => ', this.state);
+    };
+
+    render() {
+        const { counter, text } = this.state;
+
+        console.log('this ====> ', this);
+
+        return React.createElement(
+            'div',
+            null,
+
+            React.createElement('h1', null, text),
+            React.createElement(
+                'button',
+                {
+                    type: 'button',
+                    onClick: this.handleCount,
+                },
+                'test click',
+            ),
+
+            React.createElement('br', null, null),
+            React.createElement('br', null, null),
+            React.createElement('br', null, null),
+
+            React.createElement(FunctionalTest, { counter }, null),
+        );
+    }
+}
+
+React.render(
+    React.createElement(Main, null, null),
+    document.getElementById('root'),
+);
