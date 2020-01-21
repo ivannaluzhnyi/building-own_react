@@ -1,17 +1,24 @@
-class Component {
+import { scheduleClassUpdate } from './render.js';
+
+export class Component {
     constructor(props) {
         this.props = props || {};
-        this.state = {};
+        this.state = this.state || {};
+    }
 
-        this._pendingState = null;
+    setState(partialState) {
+        scheduleClassUpdate(this, partialState);
     }
-    updateComponent() {
-        // Awesome things to come
-    }
-    setState(partialNewState) {
-        const newState = Object.assign({}, this.state, partialNewState);
-        this.state = newState;
-    }
-    //will be overridden
-    render() {}
 }
+
+Component.prototype.isReactComponent = true;
+
+function createInstance(wipFiber) {
+    const instance = new wipFiber.type(wipFiber.props);
+    instance.__fiber = wipFiber;
+    return instance;
+}
+
+export default Component;
+
+export { createInstance };

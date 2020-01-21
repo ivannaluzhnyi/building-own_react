@@ -1,7 +1,7 @@
 {
-    "name": "framework",
+    "name": "framework-js",
     "version": "1.0.0",
-    "description": "",
+    "description": "build own mini-react",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,6 +13,19 @@
         "type": "git",
         "url": "git+https://github.com/kdiogo/framework-js.git"
     },
+    "lint-staged": {
+        "*.js": [
+            "pretty-quick --staged",
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged",
+            "_comment": "if test: lint-staged && npm test"
+        }
+    },
     "author": "",
     "license": "ISC",
     "bugs": {
@@ -20,9 +33,20 @@
     },
     "homepage": "https://github.com/kdiogo/framework-js#readme",
     "dependencies": {
-        "eslint-config-airbnb": "^18.0.1",
-        "eslint-config-prettier": "^6.9.0",
         "node-sass": "^4.13.0",
         "prettier": "^1.19.1"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.0.3",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb": "^18.0.1",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-plugin-import": "^2.19.1",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-react": "^7.17.0",
+        "husky": "^4.0.3",
+        "lint-staged": "^9.5.0",
+        "pretty-quick": "^2.0.1"
     }
 }

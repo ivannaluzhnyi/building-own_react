@@ -1,9 +1,13 @@
-import { createElement, createTextElement } from './Core.js';
-import { render } from './DOM.js';
+import { createElement } from './element.js';
+import { render } from './render.js';
+import { Component } from './component.js';
+import { useState } from './reconciler.js';
+
 const React = {
     createElement,
-    createTextElement,
     render,
+    Component,
+    useState,
 };
 
 export default React;
