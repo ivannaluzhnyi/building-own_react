@@ -1,6 +1,6 @@
 class Component {
-    constructor(properties) {
-        this.properties = properties;
+    constructor(props) {
+        this.props = props;
         this.state = {};
         this.prevState = null;
         this.prevRender = null;
@@ -26,7 +26,7 @@ class Component {
 
     shouldUpdate = () => {
         return (
-            JSON.stringify(this.properties) !== JSON.stringify(this.newProps) ||
+            JSON.stringify(this.props) !== JSON.stringify(this.newProps) ||
             JSON.stringify(this.state) !== JSON.stringify(this.prevState)
         );
     };

@@ -24,7 +24,7 @@ export function isStateLessComponent(element) {
 }
 
 // TypeCheck v1
-function type_check_v1(data, type) {
+export function type_check_v1(data, type) {
     switch (typeof data) {
         case 'number':
         case 'string':
