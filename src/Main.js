@@ -1,4 +1,42 @@
+/* eslint-disable max-classes-per-file */
 import React from '../modules/React/index.js';
+
+class Test extends React.Component {
+    componentDidMount = () => {
+        console.log('componentDidMount Test');
+        console.log('ttttttttt Test', this);
+    };
+
+    render() {
+        return React.createElement(
+            'div',
+            { className: 'test' },
+            'Test test element',
+        );
+    }
+}
+
+class Test2 extends React.Component {
+    componentDidMount = () => {
+        console.log('componentDidMount Test2');
+    };
+
+    render() {
+        return React.createElement(
+            'div',
+            { className: 'test' },
+            'Test22222 test element',
+        );
+    }
+}
+
+// function Test() {
+//     return React.createElement(
+//         'div',
+//         { className: 'test' },
+//         'Test test element',
+//     );
+// }
 
 class Main extends React.Component {
     constructor(props) {
@@ -7,6 +45,10 @@ class Main extends React.Component {
             text: 'Default',
         };
     }
+
+    componentDidMount = () => {
+        console.log('componentDidMount');
+    };
 
     handleChangeText = () => {
         this.setState({ text: 'New Text to display' });
@@ -24,6 +66,10 @@ class Main extends React.Component {
                     type: 'button',
                     className: 'button-type',
                     onClick: () => this.handleChangeText(),
+                    style: {
+                        'background-color': 'red',
+                        border: 'solid 1px blue',
+                    },
                 },
                 'My Button',
             ),
@@ -35,6 +81,9 @@ class Main extends React.Component {
                 },
                 text,
             ),
+
+            React.createElement(Test, {}, null),
+            React.createElement(Test2, {}, null),
         );
     }
 }

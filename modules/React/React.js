@@ -1,9 +1,10 @@
 /* eslint-disable new-cap */
-// eslint-disable-next-line camelcase
-import { isStateLessComponent, type_check_v1 } from './react-utils.js';
+import { isStateLessComponent, type_check_v1, isClass } from './react-utils.js';
+import { setAttribute } from './dom.js';
 
 export function render(element, domElement) {
     const el = new element();
+
     let prevChild = el.display();
 
     el.componentDidUpdate = () => {
@@ -14,11 +15,13 @@ export function render(element, domElement) {
     domElement.appendChild(prevChild);
 }
 
-// Paramètres du reste, permet de représenter un nombre indéfini d'arguments sous forme d'un tableau
 export const createElement = (element, properties, ...children) => {
-    console.log('element => ', element.isClass());
-    if (element.isClass()) {
+    if (isClass(element)) {
         const component = new element(properties);
+
+        if (!component.componentDidMountCalled) {
+            component.componentDidMount();
+        }
         return component.render();
     }
 
@@ -34,20 +37,11 @@ export const createElement = (element, properties, ...children) => {
             newElement.textContent += child;
         }
     });
-    if (properties !== null) {
-        Object.keys(properties).forEach(propertyName => {
-            console.log('propertyName => ', propertyName);
-            console.log('properties => ', properties);
-            if (/^on.*$/.test(propertyName)) {
-                newElement.addEventListener(
-                    propertyName.substring(2).toLowerCase(),
-                    properties[propertyName],
-                );
-            } else if (propertyName === 'className')
-                newElement.setAttribute('class', properties[propertyName]);
-            else
-                newElement.setAttribute(propertyName, properties[propertyName]);
-        });
-    }
+
+    if (properties !== null)
+        Object.keys(properties).forEach(propertyName =>
+            setAttribute(newElement, propertyName, properties[propertyName]),
+        );
+
     return newElement;
 };

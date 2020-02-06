@@ -11,16 +11,12 @@ String.prototype.snake_case = function() {
 };
 
 // Prototype check if class
-Object.prototype.isClass = () => {
-    return (
-        typeof this === 'function' &&
-        /^class\s/.test(Function.prototype.toString.call(this))
-    );
-};
+export const isClass = fn =>
+    typeof fn === 'function' && /^\s*class/.test(fn.toString());
 
 // Si c'est pas une class ou une fonction
 export function isStateLessComponent(element) {
-    return !element.isClass() && typeof element === 'function';
+    return !isClass(element) && typeof element === 'function';
 }
 
 // TypeCheck v1

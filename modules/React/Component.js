@@ -4,6 +4,7 @@ class Component {
         this.state = {};
         this.prevState = null;
         this.prevRender = null;
+        this.componentDidMountCalled = false;
     }
 
     display = () => {
@@ -13,9 +14,14 @@ class Component {
 
     setState = newState => {
         this.prevState = this.state;
-        this.state = newState;
+        this.state = { ...this.state, ...newState };
         this.display();
         this.componentDidUpdate();
+    };
+
+    componentDidMount = () => {
+        this.componentDidMountCalled = true;
+        console.log('thisss=> ', this);
     };
 
     componentDidUpdate = () => {};
