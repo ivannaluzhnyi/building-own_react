@@ -13,6 +13,7 @@
         "prefer-destructuring": 0,
         "no-use-before-define": 0,
         "import/no-cycle": 0,
+        "valid-typeof": 0,
         "no-param-reassign": 0,
         "import/no-named-default": 0,
         "import/no-named-as-default": 0,
