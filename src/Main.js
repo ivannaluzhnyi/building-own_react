@@ -1,6 +1,8 @@
 /* eslint-disable max-classes-per-file */
 import React from '../modules/React/index.js';
 
+import Button from './components/Button/Button.js';
+
 class Test extends React.Component {
     componentDidMount = () => {
         console.log('componentDidMount Test');
@@ -11,6 +13,12 @@ class Test extends React.Component {
             'div',
             { className: 'test' },
             'Test test element',
+
+            React.createElement(Button, {
+                type: 'button',
+                title: 'Test My button',
+                onClick: e => console.log('button onClick => ', e),
+            }),
         );
     }
 }

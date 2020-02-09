@@ -9,6 +9,8 @@ class Component {
         this.state = {};
         this.prevState = null;
         this.prevRender = null;
+
+        this.propTypes = {};
     }
 
     getClassName = () => this.constructor.name;
@@ -19,9 +21,8 @@ class Component {
     };
 
     setState = newState => {
-        this.state = { ...this.state, ...newState };
         this.prevState = { ...this.state };
-
+        this.state = { ...this.state, ...newState };
         this.display();
         this.componentDidUpdate(this.prevState);
     };

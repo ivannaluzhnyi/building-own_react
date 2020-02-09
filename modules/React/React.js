@@ -7,6 +7,8 @@ import {
 } from './react-utils.js';
 import { setAttribute } from './dom.js';
 
+import PropTypes from '../PropTypes/PropTypes.js';
+
 const mountedComponents = [];
 
 export const createElement = (element, properties, ...children) => {
@@ -25,6 +27,13 @@ export const createElement = (element, properties, ...children) => {
     }
 
     if (isStateLessComponent(element)) {
+        console.log('element fo,ction =>  propTypes', element.propTypes);
+        console.log('element fo,ction =>', element);
+
+        if (element.propTypes) {
+            PropTypes.checkPropTypes(element.propTypes, properties);
+        }
+
         return element(properties);
     }
 

@@ -93,12 +93,16 @@ export function type_check(data, conf) {
                 break;
             case 'properties':
                 for (const prop of Object.keys(conf[key])) {
+                    console.log('loggg=> data[prop]', data[prop]);
+                    console.log('loggg=> conf[key][prop]', conf[key][prop]);
                     if (data[prop] === undefined)
                         throw new Error('Type properties error');
-                    if (!type_check(data[prop], conf[key][prop]))
+                    if (!type_check(data[prop], conf[key][prop])) {
                         throw new Error('Type properties error');
+                    }
                 }
-                break;
+
+                return true;
 
             default:
                 return false;
