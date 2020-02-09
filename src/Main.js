@@ -4,7 +4,6 @@ import React from '../modules/React/index.js';
 class Test extends React.Component {
     componentDidMount = () => {
         console.log('componentDidMount Test');
-        console.log('ttttttttt Test', this);
     };
 
     render() {
@@ -17,9 +16,9 @@ class Test extends React.Component {
 }
 
 class Test2 extends React.Component {
-    componentDidMount = () => {
-        console.log('componentDidMount Test2');
-    };
+    // componentDidMount = () => {
+    //     console.log('componentDidMount Test2');
+    // };
 
     render() {
         return React.createElement(

@@ -19,6 +19,15 @@ export function isStateLessComponent(element) {
     return !isClass(element) && typeof element === 'function';
 }
 
+/**
+ *
+ * @param {Array<string>} arr
+ * @param {class} cl
+ */
+export function checkIfClassExist(arr, cl) {
+    return arr.find(el => el === cl.getClassName()) !== undefined;
+}
+
 // TypeCheck v1
 export function type_check_v1(data, type) {
     switch (typeof data) {

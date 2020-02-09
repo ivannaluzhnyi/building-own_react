@@ -1,11 +1,17 @@
+export const ComponentLifecycle = Object.freeze({
+    CREATE: 'CREATE',
+    MOUNTED: 'MOUNTED',
+});
+
 class Component {
     constructor(props) {
         this.props = props;
         this.state = {};
         this.prevState = null;
         this.prevRender = null;
-        this.componentDidMountCalled = false;
     }
+
+    getClassName = () => this.constructor.name;
 
     display = () => {
         if (this.shouldUpdate()) this.prevRender = this.render();
@@ -13,16 +19,14 @@ class Component {
     };
 
     setState = newState => {
-        this.prevState = this.state;
         this.state = { ...this.state, ...newState };
+        this.prevState = { ...this.state };
+
         this.display();
-        this.componentDidUpdate();
+        this.componentDidUpdate(this.prevState);
     };
 
-    componentDidMount = () => {
-        this.componentDidMountCalled = true;
-        console.log('thisss=> ', this);
-    };
+    componentDidMount = () => {};
 
     componentDidUpdate = () => {};
 

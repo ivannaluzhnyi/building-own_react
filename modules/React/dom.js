@@ -1,35 +1,55 @@
+/* eslint-disable new-cap */
 import { type_check_v1 } from './react-utils.js';
 
 /**
  *
- * @param {object} dom
+ * @param {*} element
+ * @param {*} domElement
+ */
+export function render(element, domElement) {
+    const el = new element();
+    el.lifeCycle = 'MOUNTED';
+
+    let prevChild = el.display();
+
+    el.componentDidUpdate = () => {
+        const child = el.display();
+        domElement.replaceChild(child, prevChild);
+        prevChild = child;
+    };
+    domElement.appendChild(prevChild);
+}
+
+/**
+ *
+ * @param {HTMLElement} domElementElement
  * @param {string} propertyName
  * @param {string} value
  */
-export function setAttribute(dom, propertyName, value) {
+export function setAttribute(domElement, propertyName, value) {
     if (propertyName === 'className') propertyName = 'class';
 
-    if (/on\w+/.test(propertyName)) {
-        dom.addEventListener(propertyName.substring(2).toLowerCase(), value);
-    }
+    if (/on\w+/.test(propertyName))
+        domElement.addEventListener(
+            propertyName.substring(2).toLowerCase(),
+            value,
+        );
 
     if (propertyName === 'style') {
-        if (!value || typeof value === 'string') {
-            dom.style.cssText = value || '';
-        }
+        if (!value || typeof value === 'string')
+            domElement.style.cssText = value || '';
 
         if (value && typeof value === 'object') {
             Object.keys(value).forEach(elm => {
-                dom.style[elm] = type_check_v1(value[elm], 'number')
+                domElement.style[elm] = type_check_v1(value[elm], 'number')
                     ? `${value[elm]}px`
                     : value[elm];
             });
         }
     } else {
-        if (propertyName in dom) {
-            dom[propertyName] = value || '';
-        }
-        if (value) dom.setAttribute(propertyName, value);
-        else dom.removeAttribute(propertyName, value);
+        if (propertyName in domElement) domElement[propertyName] = value || '';
+
+        if (value) domElement.setAttribute(propertyName, value);
+        else domElement.removeAttribute(propertyName, value);
     }
 }

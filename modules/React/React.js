@@ -1,27 +1,26 @@
 /* eslint-disable new-cap */
-import { isStateLessComponent, type_check_v1, isClass } from './react-utils.js';
+import {
+    isStateLessComponent,
+    type_check_v1,
+    isClass,
+    checkIfClassExist,
+} from './react-utils.js';
 import { setAttribute } from './dom.js';
 
-export function render(element, domElement) {
-    const el = new element();
-
-    let prevChild = el.display();
-
-    el.componentDidUpdate = () => {
-        const child = el.display();
-        domElement.replaceChild(child, prevChild);
-        prevChild = child;
-    };
-    domElement.appendChild(prevChild);
-}
+const mountedComponents = [];
 
 export const createElement = (element, properties, ...children) => {
     if (isClass(element)) {
         const component = new element(properties);
 
-        if (!component.componentDidMountCalled) {
+        if (
+            !checkIfClassExist(mountedComponents, component) &&
+            component.componentDidMount
+        ) {
             component.componentDidMount();
         }
+
+        mountedComponents.push(component.getClassName());
         return component.render();
     }
 
@@ -29,19 +28,19 @@ export const createElement = (element, properties, ...children) => {
         return element(properties);
     }
 
-    const newElement = document.createElement(element);
+    const domElement = document.createElement(element);
     children.forEach(child => {
         if (type_check_v1(child, 'object')) {
-            newElement.appendChild(child);
+            domElement.appendChild(child);
         } else {
-            newElement.textContent += child;
+            domElement.textContent += child;
         }
     });
 
     if (properties !== null)
         Object.keys(properties).forEach(propertyName =>
-            setAttribute(newElement, propertyName, properties[propertyName]),
+            setAttribute(domElement, propertyName, properties[propertyName]),
         );
 
-    return newElement;
+    return domElement;
 };
