@@ -11,7 +11,12 @@ class Main extends React.Component {
             { className: 'main-component' },
 
             React.createElement(Navbar, {}, null),
-            React.createElement(HomeContainer, {}, null),
+            React.createElement(
+                'div',
+                { className: 'container' },
+
+                React.createElement(HomeContainer, {}, null),
+            ),
         );
     }
 }
