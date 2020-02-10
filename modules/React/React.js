@@ -15,6 +15,14 @@ export const createElement = (element, properties, ...children) => {
     if (isClass(element)) {
         const component = new element(properties);
 
+        if (component.propTypes) {
+            PropTypes.checkPropTypes(
+                component.propTypes,
+                properties,
+                component.getClassName(),
+            );
+        }
+
         if (
             !checkIfClassExist(mountedComponents, component) &&
             component.componentDidMount
@@ -27,17 +35,19 @@ export const createElement = (element, properties, ...children) => {
     }
 
     if (isStateLessComponent(element)) {
-        console.log('element fo,ction =>  propTypes', element.propTypes);
-        console.log('element fo,ction =>', element);
-
         if (element.propTypes) {
-            PropTypes.checkPropTypes(element.propTypes, properties);
+            PropTypes.checkPropTypes(
+                element.propTypes,
+                properties,
+                element.name,
+            );
         }
 
         return element(properties);
     }
 
     const domElement = document.createElement(element);
+
     children.forEach(child => {
         if (type_check_v1(child, 'object')) {
             domElement.appendChild(child);

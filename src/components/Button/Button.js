@@ -37,3 +37,23 @@ Button.propTypes = {
     title: PropTypes.string.isRequired,
     onClick: PropTypes.func,
 };
+
+Button.props = ({ type, small, large, disabled, title, onClick }) => ({
+    type,
+    small,
+    large,
+    disabled,
+    title,
+    onClick,
+});
+
+// ex
+
+// React.createElement(
+//     Button,
+//     Button.props({
+//         type: 'button',
+//         title: 'Test My button',
+//         onClick: e => console.log('button onClick => ', e),
+//     }),
+// ),

@@ -10,7 +10,7 @@ class Component {
         this.prevState = null;
         this.prevRender = null;
 
-        this.propTypes = {};
+        this.propTypes = undefined;
     }
 
     getClassName = () => this.constructor.name;
