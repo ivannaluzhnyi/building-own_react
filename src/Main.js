@@ -3,6 +3,7 @@ import React from '../modules/React/index.js';
 
 import Navbar from './components/Navbar/Navbar.js';
 import HomeContainer from './containers/HomeContainer/HomeContainer.js';
+import EventContainer from './containers/EventContainer/EventContainer.js';
 
 class Main extends React.Component {
     render() {
@@ -16,6 +17,7 @@ class Main extends React.Component {
                 { className: 'container' },
 
                 React.createElement(HomeContainer, {}, null),
+                React.createElement(EventContainer, {}, null),
             ),
         );
     }

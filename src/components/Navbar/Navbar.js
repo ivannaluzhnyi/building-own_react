@@ -1,16 +1,7 @@
 import React from '../../../modules/React/index.js';
 import PropTypes from '../../../modules/PropTypes/PropTypes.js';
 
-const links = [
-    {
-        href: '#!',
-        title: 'Sass',
-    },
-    {
-        href: '#!',
-        title: 'Components',
-    },
-];
+import routes from '../../routes.js';
 
 const LiElemnt = ({ title, href }) =>
     React.createElement(
@@ -42,7 +33,7 @@ const Navbar = () => {
                     className: 'right hide-on-med-and-down',
                 },
 
-                ...links.map(el =>
+                ...routes.map(el =>
                     React.createElement(LiElemnt, { ...el }, null),
                 ),
             ),
