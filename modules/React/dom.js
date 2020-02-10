@@ -8,15 +8,17 @@ import { type_check_v1 } from './react-utils.js';
  */
 export function render(element, domElement) {
     const el = new element();
-    el.lifeCycle = 'MOUNTED';
 
     let prevChild = el.display();
 
+    console.log('el => ', el);
     el.componentDidUpdate = () => {
         const child = el.display();
+        console.log('child => ', child);
         domElement.replaceChild(child, prevChild);
         prevChild = child;
     };
+
     domElement.appendChild(prevChild);
 }
 

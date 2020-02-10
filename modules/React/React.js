@@ -31,6 +31,13 @@ export const createElement = (element, properties, ...children) => {
         }
 
         mountedComponents.push(component.getClassName());
+
+        console.log('component => ', component);
+
+        // component.componentDidUpdate = () => {
+        //     console.log('componentDidUpdate => ');
+        //     console.log('re render ==> ', component.render());
+        // };
         return component.render();
     }
 

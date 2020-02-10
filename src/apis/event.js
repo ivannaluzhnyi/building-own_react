@@ -7,29 +7,47 @@ async function searchUpcomingEventsByArtistName(artistName) {
     return apiCall({ method: 'GET', url });
 }
 
-async function searchEventsByLocationClient(per_page) {
+async function searchEventsByLocationClient(per_page, page) {
     const { API_KEY, API_URL } = config;
+
+    const getUrlRequest = ({ latitude, longitude }) =>
+        `${API_URL}events.json?location=geo:${latitude},${longitude}&per_page=${per_page}&page=${page}&apikey=${API_KEY}`;
+
+    const callRequest = async geolocation =>
+        apiCall({
+            method: 'GET',
+            url: getUrlRequest(geolocation),
+        })
+            .then(res => res.json())
+            .then(rest => {
+                if (
+                    rest.resultsPage !== undefined &&
+                    rest.resultsPage.status === 'ok'
+                ) {
+                    return rest.resultsPage.results.event;
+                }
+
+                return rest.resultsPage;
+            });
 
     if (navigator.geolocation) {
         // Call getCurrentPosition with success and failure callbacks
         navigator.geolocation.getCurrentPosition(
             props => {
-                const { longitude, latitude } = props.coords;
-                console.log('longitude => ', longitude);
-                console.log('latitude => ', latitude);
+                const { coords } = props;
 
-                const url = `${API_URL}events.json?location=geo:${latitude},${longitude}&per_page=${per_page}&apikey=${API_KEY}`;
+                if (coords.latitude && coords.longitude) {
+                    return callRequest(coords);
+                }
 
-                const testcall = apiCall({ method: 'GET', url });
-
-                console.log('testcall => ', testcall);
-                return Promise.resolve(testcall);
+                return callRequest(config.defaultGeolocation);
             },
+
             () => console.log('err geolocation'),
         );
     }
 
-    console.warn('Need geolocation');
+    return callRequest(config.defaultGeolocation);
 }
 
 export { searchUpcomingEventsByArtistName, searchEventsByLocationClient };

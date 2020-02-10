@@ -1,33 +1,38 @@
 import React from '../../../modules/React/index.js';
 
+// import { isEmpty } from '../../utils/helper.js';
+
 import { searchEventsByLocationClient } from '../../apis/event.js';
+
+const EventItem = () => {
+    // console.log('event => ', event);
+    return React.createElement('div', { className: 'col s12 m3 ' }, 'Event');
+};
 
 class EventContainer extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            // events: [],
+            events: [],
+            loadedPage: 1,
         };
     }
 
-    componentDidMount = () => {
-        // console.log('navigator.geolocation => ', navigator.geolocation);
+    componentDidMount = async () => {
+        const { loadedPage } = this.state;
+        const res = await searchEventsByLocationClient(5, loadedPage);
+        // const res2 = await searchEventsByLocationClient(10, 2);
 
-        searchEventsByLocationClient(10)
-            .then(res => res.json())
-            .then(json => console.log('============ > json myyy > ', json));
-
-        searchEventsByLocationClient(10).then(json =>
-            console.log('================> myyy > ', json),
-        );
-
-        // const res = await searchEventsByLocationClient(10);
-
-        // console.log('res componentDidMount => ', res);
+        this.setState({ events: res });
     };
 
     render() {
+        const { events, loadedPage } = this.state;
+        // console.log('events => ', events);
+        // console.log('events isEmpty => ', isEmpty(events));
+
+        console.log('state => ', this.state);
         return React.createElement(
             'div',
             { className: 'event-container' },
@@ -36,7 +41,25 @@ class EventContainer extends React.Component {
                 'section',
                 {},
 
-                React.createElement('h3', {}, 'Upcoming events'),
+                React.createElement(
+                    'h3',
+                    {
+                        onClick: () => this.setState({ loadedPage: 2 }),
+                    },
+                    'Upcoming events (Test click)',
+                ),
+                React.createElement('p', {}, loadedPage),
+
+                // !isEmpty(events)
+                React.createElement(
+                    'div',
+                    { className: 'row' },
+
+                    ...events.map(event =>
+                        React.createElement(EventItem, { event }),
+                    ),
+                ),
+                // : '',
             ),
         );
     }
