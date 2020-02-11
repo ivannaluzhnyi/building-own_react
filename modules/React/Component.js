@@ -1,3 +1,5 @@
+// import { reRender } from './dom.js';
+
 export const ComponentLifecycle = Object.freeze({
     CREATE: 'CREATE',
     MOUNTED: 'MOUNTED',
@@ -9,6 +11,8 @@ class Component {
         this.state = {};
         this.prevState = null;
         this.prevRender = null;
+
+        this.prevProps = null;
 
         this.propTypes = undefined;
     }
@@ -29,6 +33,8 @@ class Component {
         this.state = { ...this.state, ...newState };
         this.display();
         this.componentDidUpdate(this.prevState);
+        // console.log('newElm => ', newElm);
+        // reRender(newElm);
     };
 
     componentDidMount = () => {};

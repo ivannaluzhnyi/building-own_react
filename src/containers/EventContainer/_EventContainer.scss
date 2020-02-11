@@ -1,0 +1,9 @@
+.card-content-artist {
+    & > div {
+        & > p {
+            & > a {
+                color: white;
+            }
+        }
+    }
+}

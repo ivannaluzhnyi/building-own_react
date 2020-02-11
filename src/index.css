@@ -1,0 +1,11 @@
+.test-class {
+    color: purple;
+}
+
+.home-container {
+    display: flex;
+}
+
+.card-content-artist > div > p > a {
+    color: white;
+}
