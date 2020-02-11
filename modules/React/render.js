@@ -113,9 +113,9 @@ function createNewDom(vnode, parent, comp, olddom) {
         parent.appendChild(dom);
     }
 
-    for (let i = 0; i < vnode.children.length; i++) {
-        render(vnode.children[i], dom, null, null);
-    }
+    vnode.children.forEach(elm => {
+        render(elm, dom, null, null);
+    });
 }
 
 function diffDOM(vnode, parent, comp, olddom) {
@@ -130,10 +130,11 @@ function diffDOM(vnode, parent, comp, olddom) {
 
     // Réutiliser les nœuds enfants
     let olddomChild = olddom.firstChild;
-    for (let i = 0; i < vnode.children.length; i++) {
-        render(vnode.children[i], olddom, null, olddomChild);
+
+    vnode.children.forEach(elm => {
+        render(elm, olddom, null, olddomChild);
         olddomChild = olddomChild && olddomChild.nextSibling;
-    }
+    });
 
     // Supprimer les enfants supplémentaires
     while (olddomChild) {
