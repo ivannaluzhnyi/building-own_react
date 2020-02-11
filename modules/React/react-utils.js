@@ -93,8 +93,6 @@ export function type_check(data, conf) {
                 break;
             case 'properties':
                 for (const prop of Object.keys(conf[key])) {
-                    console.log('loggg=> data[prop]', data[prop]);
-                    console.log('loggg=> conf[key][prop]', conf[key][prop]);
                     if (data[prop] === undefined)
                         throw new Error('Type properties error');
                     if (!type_check(data[prop], conf[key][prop])) {
@@ -123,3 +121,9 @@ export function prop_access(object, path) {
               return acc[curr] ? acc[curr] : logErr;
           }, undefined);
 }
+
+String.prototype.interpolate = function(obj) {
+    return this.replace(/{([^}]+)}/g, function(dummy, v) {
+        return prop_access(obj, v);
+    });
+};

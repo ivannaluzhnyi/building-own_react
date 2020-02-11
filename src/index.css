@@ -1,8 +1,14 @@
 .test-class {
   color: purple; }
 
+.page-footer {
+  margin-top: 30px; }
+
 .home-container {
   display: flex; }
 
 .card-content-artist > div > p > a {
   color: white; }
+
+.location {
+  margin-bottom: 20px !important; }
