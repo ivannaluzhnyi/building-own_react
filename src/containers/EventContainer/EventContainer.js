@@ -1,6 +1,7 @@
 import React from '../../../modules/React/index.js';
 import PropTypes from '../../../modules/PropTypes/PropTypes.js';
 import Button from '../../components/Button/Button.js';
+import { searchEventsByLocationClient } from '../../apis/event.js';
 
 import EventMapItem from './EventMapItem.js';
 
@@ -10,10 +11,30 @@ class EventContainer extends React.Component {
         this.propTypes = {
             events: PropTypes.array.isRequired,
         };
+
+        this.state = {
+            events: [],
+            loadedPageEvent: 1,
+        };
     }
 
+    handleLoadPlusEvent = async () => {
+        const { events, loadedPageEvent } = this.state;
+        const newLoadedPage = loadedPageEvent + 1;
+        const res = await searchEventsByLocationClient(10, newLoadedPage);
+
+        // console.log('handleLoadPlusEvent => ', res);
+
+        this.setState({
+            loadedPageEvent: newLoadedPage,
+            events: [...events, ...res],
+        });
+    };
+
     render() {
-        const { events, handleLoadPlusEvent } = this.props;
+        // const { events, handleLoadPlusEvent } = this.props;
+        const { events } = this.state;
+
         return React.createElement(
             'div',
             { className: 'event-container' },
@@ -42,7 +63,7 @@ class EventContainer extends React.Component {
                         {
                             ...Button.props({
                                 title: "Charger plus d'événements ... ",
-                                onClick: () => handleLoadPlusEvent(),
+                                onClick: () => this.handleLoadPlusEvent(),
                             }),
                         },
                         null,

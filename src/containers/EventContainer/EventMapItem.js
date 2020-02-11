@@ -110,13 +110,11 @@ const EventMapItem = ({ event }) => {
 
                 React.createElement(
                     'p',
-                    {},
+                    { className: 'location' },
                     `Lieu: ${location.city} - ${venue.displayName}`,
                 ),
 
-                React.createElement('br', {}, null),
-
-                React.createElement(ArtistElmentHead, {}, null),
+                React.createElement(ArtistElmentHead, {}),
                 React.createElement(
                     ArtistElment,
                     { artists: performance },

@@ -1,16 +1,10 @@
-import { createElement } from './React.js';
-import { render } from './dom.js';
+import createElement from './createElement.js';
+import render from './render.js';
 import Component from './Component.js';
-
-// import './dom.js';
-// import './Component.js';
-
-// console.log('this => ', this);
 
 const React = {
     createElement,
-    Component,
     render,
+    Component,
 };
-
 export default React;
