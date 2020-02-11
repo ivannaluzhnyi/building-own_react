@@ -33,7 +33,7 @@ export function render(element, domElement) {
 
     // console.log('2 prevChild => ', prevChild);
 
-    rootDOMElement = domElement;
+    // rootDOMElement = domElement;
 
     domElement.appendChild(prevChild);
 }

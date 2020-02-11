@@ -1,11 +1,8 @@
 .test-class {
-    color: purple;
-}
+  color: purple; }
 
 .home-container {
-    display: flex;
-}
+  display: flex; }
 
 .card-content-artist > div > p > a {
-    color: white;
-}
+  color: white; }
