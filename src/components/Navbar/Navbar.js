@@ -6,15 +6,24 @@ import { Router } from '../../../modules/react-router/index.js';
 
 const generatedRouts = Router.generate(routes);
 
-const LiElemnt = ({ title, href }) =>
+const LiElemnt = ({ title, href, handleSetPage }) =>
     React.createElement(
         'li',
         null,
 
-        React.createElement('a', { href }, title),
+        // React.createElement(Link, {
+        //     to: href,
+        //     title,
+        // }),
+
+        React.createElement(
+            'a',
+            { href, onClick: () => handleSetPage(href) },
+            title,
+        ),
     );
 
-const Navbar = () => {
+const Navbar = ({ handleSetPage }) => {
     return React.createElement(
         'nav',
         {},
@@ -37,7 +46,11 @@ const Navbar = () => {
                 },
 
                 ...generatedRouts.map(el =>
-                    React.createElement(LiElemnt, { ...el }, null),
+                    React.createElement(
+                        LiElemnt,
+                        { ...el, handleSetPage },
+                        null,
+                    ),
                 ),
             ),
         ),

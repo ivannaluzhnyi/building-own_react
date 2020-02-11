@@ -3,6 +3,7 @@ import Button from '../../components/Button/Button.js';
 import { searchEventsByLocationClient } from '../../apis/event.js';
 
 import EventMapItem from './EventMapItem.js';
+import { isEmpty } from '../../utils/helper.js';
 
 class EventContainer extends React.Component {
     constructor(props) {
@@ -20,6 +21,8 @@ class EventContainer extends React.Component {
         const res = await searchEventsByLocationClient(10, loadedPageEvent);
 
         console.log('events => ', res);
+
+        localStorage.setItem('events_component_mount', JSON.stringify(res));
         this.setState({ events: [...res] });
     };
 
@@ -39,6 +42,16 @@ class EventContainer extends React.Component {
     render() {
         const { events } = this.state;
 
+        let upEvents = events;
+
+        if (isEmpty(events)) {
+            const localEvants = localStorage.getItem('events_component_mount');
+
+            if (localEvants !== null) {
+                upEvents = JSON.parse(localEvants);
+            }
+        }
+
         return React.createElement(
             'div',
             { className: 'event-container' },
@@ -53,7 +66,7 @@ class EventContainer extends React.Component {
                     'div',
                     { className: 'row' },
 
-                    ...events.map(event =>
+                    ...upEvents.map(event =>
                         React.createElement(EventMapItem, { event }),
                     ),
                 ),

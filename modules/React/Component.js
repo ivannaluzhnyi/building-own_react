@@ -58,7 +58,7 @@ class Component {
 export default Component;
 
 // Rechercher le nœud DOM réel rendu par l'instance de composant actuelle
-function getDOM(comp) {
+export function getDOM(comp) {
     let rendered = comp.__rendered;
     // Trouvez le premier nœud dom non-composant à travers la chaîne __render
     while (rendered instanceof Component) {
