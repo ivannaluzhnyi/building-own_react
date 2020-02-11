@@ -16,8 +16,6 @@ class Main extends React.Component {
                 'div',
                 { className: 'container' },
 
-                React.createElement('h3', {}, 'Test click'),
-
                 React.createElement(EventContainer),
             ),
         );

@@ -3,7 +3,14 @@ import render from './render.js';
 class Component {
     constructor(props) {
         this.props = props;
+        this.state = {};
+
+        this.prevProps = null;
+
+        this.propTypes = undefined;
     }
+
+    getClassName = () => this.constructor.name;
 
     setState(state) {
         setTimeout(() => {
@@ -20,6 +27,32 @@ class Component {
             render(vnode, olddom.parentNode, this, olddom);
         }, 0);
     }
+
+    display = () => {
+        // console.log('this.prevRender 1 => ', this.prevRender);
+        if (this.shouldUpdate()) this.prevRender = this.render();
+        // console.log('this.shouldUpdate() => ', this.shouldUpdate());
+        // console.log('this.prevRender 2 => ', this.prevRender);
+
+        return this.prevRender;
+    };
+
+    componentDidMount = () => {};
+
+    componentDidUpdate = () => {};
+
+    getState = () => {
+        return this.state;
+    };
+
+    shouldUpdate = () => {
+        return (
+            JSON.stringify(this.props) !== JSON.stringify(this.newProps) ||
+            JSON.stringify(this.state) !== JSON.stringify(this.prevState)
+        );
+    };
+
+    render() {}
 }
 
 export default Component;

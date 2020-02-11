@@ -1,5 +1,4 @@
 import React from '../../../modules/React/index.js';
-import PropTypes from '../../../modules/PropTypes/PropTypes.js';
 import Button from '../../components/Button/Button.js';
 import { searchEventsByLocationClient } from '../../apis/event.js';
 
@@ -8,15 +7,21 @@ import EventMapItem from './EventMapItem.js';
 class EventContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.propTypes = {
-            events: PropTypes.array.isRequired,
-        };
 
         this.state = {
             events: [],
             loadedPageEvent: 1,
         };
     }
+
+    componentDidMount = async () => {
+        const { loadedPageEvent } = this.state;
+
+        const res = await searchEventsByLocationClient(10, loadedPageEvent);
+
+        console.log('events => ', res);
+        this.setState({ events: [...res] });
+    };
 
     handleLoadPlusEvent = async () => {
         const { events, loadedPageEvent } = this.state;
@@ -32,7 +37,6 @@ class EventContainer extends React.Component {
     };
 
     render() {
-        // const { events, handleLoadPlusEvent } = this.props;
         const { events } = this.state;
 
         return React.createElement(

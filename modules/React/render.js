@@ -1,10 +1,15 @@
 /* eslint-disable new-cap */
 /* eslint-disable no-plusplus */
-import { isClass, isStateLessComponent } from './react-utils.js';
+import {
+    isClass,
+    isStateLessComponent,
+    checkIfClassExist,
+} from './react-utils.js';
+import PropTypes from '../PropTypes/PropTypes.js';
+
+const mountedComponents = [];
 
 export default function render(vnode, parent, comp, olddom) {
-    // console.log('vnode => ', vnode);
-    // console.log('parent => ', parent);
     let dom;
     // Chaîne ou numéro de rendu
     if (typeof vnode === 'string' || typeof vnode === 'number') {
@@ -42,6 +47,31 @@ export default function render(vnode, parent, comp, olddom) {
     if (isClass(vnode.element)) {
         const inst = new vnode.element(vnode.properities);
 
+        if (vnode.element.propTypes) {
+            PropTypes.checkPropTypes(
+                vnode.element.propTypes,
+                vnode.properities,
+                inst.getClassName(),
+            );
+        }
+
+        if (inst.propTypes) {
+            PropTypes.checkPropTypes(
+                inst.propTypes,
+                vnode.properities,
+                inst.getClassName(),
+            );
+        }
+
+        if (
+            !checkIfClassExist(mountedComponents, inst) &&
+            inst.componentDidMount
+        ) {
+            inst.componentDidMount();
+        }
+
+        mountedComponents.push(inst.getClassName());
+
         if (comp) {
             comp.__rendered = inst;
         }
@@ -52,6 +82,14 @@ export default function render(vnode, parent, comp, olddom) {
 
     if (isStateLessComponent(vnode.element)) {
         const innerVnode = vnode.element(vnode.properities);
+
+        if (vnode.element.propTypes) {
+            PropTypes.checkPropTypes(
+                vnode.element.propTypes,
+                vnode.properities,
+                vnode.element.name,
+            );
+        }
 
         render(innerVnode, parent, null, null);
     }
