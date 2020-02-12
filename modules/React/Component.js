@@ -20,12 +20,6 @@ class Component {
             const vnode = this.render(); // Lorsque l'état change, restituez la méthode de rendu du composant
             const olddom = getDOM(this);
 
-            // console.log('=========== setState ========');
-
-            // console.log('vnode => ', vnode);
-            // console.log('vnode parentNode=> ', olddom.parentNode);
-            // console.log('this => ', this);
-            // console.log('olddom => ', olddom);
             render(vnode, olddom.parentNode, this, olddom);
         }, 0);
     }
