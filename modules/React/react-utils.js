@@ -112,13 +112,13 @@ export function type_check(data, conf) {
 
 // PropAccess
 export function prop_access(object, path) {
-    const logErr = console.log(`${path} not exist`);
-    if (object === null || object === undefined) return logErr;
+    if (object === null || object === undefined)
+        return console.log(`${path} not exist`);
     return path === null || path === '' || path === undefined
         ? object
         : path.split('.').reduce((acc, curr) => {
               if (acc === undefined) return object[curr];
-              return acc[curr] ? acc[curr] : logErr;
+              return acc[curr] ? acc[curr] : console.log(`${path} not exist`);
           }, undefined);
 }
 

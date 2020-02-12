@@ -125,6 +125,10 @@ function createNewDom(vnode, parent, comp, olddom) {
     }
 
     vnode.children.forEach(elm => {
+        if (typeof elm === 'string' && vnode.properities.vars !== undefined) {
+            elm = elm.interpolate(vnode.properities.vars);
+        }
+
         render(elm, dom, null, null);
     });
 }
@@ -216,6 +220,10 @@ function setAttrs(dom, props) {
                 props[propertyName],
                 false,
             );
+        }
+
+        if (propertyName === 'vars') {
+            return;
         }
 
         // Attribuez directement les propriétés restantes
