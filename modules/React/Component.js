@@ -30,14 +30,7 @@ class Component {
         }, 0);
     }
 
-    display = () => {
-        // console.log('this.prevRender 1 => ', this.prevRender);
-        if (this.shouldUpdate()) this.prevRender = this.render();
-        // console.log('this.shouldUpdate() => ', this.shouldUpdate());
-        // console.log('this.prevRender 2 => ', this.prevRender);
-
-        return this.prevRender;
-    };
+    display = () => this.shouldUpdate() && this.render();
 
     componentDidMount = () => {};
 

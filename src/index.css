@@ -1,20 +1,15 @@
 .test-class {
-    color: purple;
-}
+  color: purple; }
 
 .page-footer {
-    margin-top: 30px;
-}
+  margin-top: 30px; }
 
 .home-container {
-    display: flex;
-    flex-direction: column;
-}
+  display: flex;
+  flex-direction: column; }
 
 .card-content-artist > div > p > a {
-    color: white;
-}
+  color: white; }
 
 .location {
-    margin-bottom: 20px !important;
-}
+  margin-bottom: 20px !important; }
