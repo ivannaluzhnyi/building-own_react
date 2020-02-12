@@ -9,6 +9,12 @@ import PropTypes from '../PropTypes/PropTypes.js';
 
 const mountedComponents = [];
 
+const contexts = [];
+
+export function createContext(nameContext, propsValue) {
+    contexts.push({ [nameContext]: propsValue });
+}
+
 export default function render(vnode, parent, comp, olddom) {
     let dom;
     // Chaîne ou numéro de rendu
@@ -75,6 +81,11 @@ export default function render(vnode, parent, comp, olddom) {
         if (comp) {
             comp.__rendered = inst;
         }
+
+        // Object.keys(contexts).forEach(context => {
+        //     // inst.context =
+        //     // console.log('context => ', context);
+        // });
 
         const innerVnode = inst.render();
         render(innerVnode, parent, inst, olddom);

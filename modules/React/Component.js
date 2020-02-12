@@ -5,6 +5,8 @@ class Component {
         this.props = props;
         this.state = {};
 
+        this.contexet = {};
+
         this.prevProps = null;
 
         this.propTypes = undefined;

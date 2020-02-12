@@ -8,8 +8,6 @@ import Footer from './components/Footer/Footer.js';
 
 import routes from './routes.js';
 
-// console.log('router.display() => ', ...router.display());
-
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -38,10 +36,6 @@ class Main extends React.Component {
                 },
 
                 React.createElement(Router, { routes }),
-                // ...router.display(),
-                // Router.render(),
-
-                // React.createElement(EventContainer),
             ),
 
             React.createElement(Footer, {}),

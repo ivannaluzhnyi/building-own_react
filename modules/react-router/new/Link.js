@@ -1,5 +1,5 @@
-import React from '../React/index.js';
-import PropTypes from '../PropTypes/PropTypes.js';
+import React from '../../React/index.js';
+import PropTypes from '../../PropTypes/PropTypes.js';
 
 class Link extends React.Component {
     constructor(props) {
