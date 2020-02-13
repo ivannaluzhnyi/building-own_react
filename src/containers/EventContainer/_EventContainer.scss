@@ -1,0 +1,13 @@
+.card-content-artist {
+    & > div {
+        & > p {
+            & > a {
+                color: white;
+            }
+        }
+    }
+}
+
+.location {
+    margin-bottom: 20px !important;
+}
