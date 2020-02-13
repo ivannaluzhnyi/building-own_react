@@ -25,3 +25,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# config with api-key, url, default config
+
+./src/apis/config.js*
