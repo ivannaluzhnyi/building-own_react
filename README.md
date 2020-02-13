@@ -1,4 +1,4 @@
-# framework-js
+# own reactjs project
 
 ## Instalation & start
 
